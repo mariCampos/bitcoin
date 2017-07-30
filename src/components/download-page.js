@@ -132,7 +132,7 @@ export default class DownloadCampaign extends React.Component {
         		<tr>
           			<td>{item.WIF}</td>
           			<td>{item.key}</td>
-          			<td><a href="{item.seed}" target="_blank">{item.seed}</a></td>
+          			<td><a href={item.seed} target="_blank">{item.seed}</a></td>
         		</tr>
       		);
     	});
