@@ -1,0 +1,147 @@
+body {
+  margin-top: 0;
+  margin-left: 2px;
+  margin-right: 2px;
+  padding: 0;
+  font-family: 'Ubuntu', sans-serif;
+  background-color: indianred;
+}
+
+.AddCampaign-div {
+	box-sizing:border-box;
+  padding-top:15px;
+  padding-bottom:5%;
+  text-align:center;
+}
+
+.AddCampaign-div button {
+  height:70px;
+  width:250px;
+  background:#fff;
+  border:3px solid #f2f2f2;
+  border-radius:5px;
+  color: slategrey;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+}
+
+input {
+	border-radius: 4px;
+}
+
+.col-sm-12 {
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.col-xs-12 p {
+  margin:0 auto;
+  text-align: center;
+  font-size: 4.0em;
+}
+
+.height20{
+	height: 20px;
+}
+
+.height10 {
+	height: 10px;
+}
+
+body {
+  margin:0px;
+  font-family: 'Ubuntu', sans-serif;
+	background-size: 100% 110%;
+}
+h2, h3, h4, h5, h6, a {
+  margin:0; padding:0;
+}
+.formadd {
+  margin:0 auto;
+  max-width:500px;
+}
+.form-header {
+  color:#000;
+  text-align:center;
+  font-size:90%;
+}
+/* .login-header h1 {
+   text-shadow: 0px 5px 15px #000; 
+}*/
+.campaign-form {
+  border:.3px solid #fff;
+  border-radius:10px;
+  box-shadow:0px 0px 10px #000;
+}
+.campaign-form h4 {
+  text-align:left;
+  margin-left:40px;
+  color:#000;
+}
+.campaign-form {
+  box-sizing:border-box;
+  padding-top:15px;
+  padding-bottom:10%;
+  margin:5% auto;
+  text-align:center;
+}
+.formadd input[type="text"],
+.formadd input[type="number"] {
+  max-width:400px;
+	width: 80%;
+  line-height:3em;
+  font-family: 'Ubuntu', sans-serif;
+  margin:1em 2em;
+  border-radius:5px;
+  border:2px solid #f2f2f2;
+  outline:none;
+  padding-left:10px;
+}
+.campaign-form button {
+  height:50px;
+  width:150px;
+  background:#fff;
+  border:3px solid #f2f2f2;
+  border-radius:5px;
+  color: slategrey;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+}
+
+.row button {
+  height:50px;
+  width:250px;
+  background:#eeeeee;
+  border:3px solid #f2f2f2;
+  border-radius:5px;
+  color: slategrey;
+  text-transform:uppercase;
+  font-family: 'Ubuntu', sans-serif;
+  cursor:pointer;
+}
+
+.col-sm-6 {
+	text-align: center;
+}
+
+/*Media Querie*/
+@media only screen and (min-width : 150px) and (max-width : 530px){
+  .campaign-form h4 {
+    text-align:center;
+    margin:0;
+  }
+  .login-button {
+    margin-bottom:10px;
+  }
+  .col-sm-6 {
+	margin-bottom: 10px;
+  }
+}
+
+@media only screen and (min-width: 500px) and (max-width: 770px) {
+	.col-sm-6 {
+		margin-bottom: 10px;
+	}
+}
