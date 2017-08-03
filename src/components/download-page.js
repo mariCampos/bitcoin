@@ -10,15 +10,25 @@ export default class DownloadCampaign extends React.Component {
 	constructor(props) {
 		super(props);
 
-		
+		console.log(props);
 		this.state = { 
         	wallet: this.props.match.params.wallet,
 			title: this.props.match.params.title,
-			money: this.props.match.params.money,
+			money: this.props.match.params.value,
 			date: this.props.match.params.date 
       };
  		
 	}
+
+	ascii_to_hexa(str)
+  	{
+		var arr1 = '';
+		for (var n = 0, l = str.length; n < l; n ++) 
+     	{
+			arr1 += Number(str.charCodeAt(n)).toString(16);
+	 	}
+		return arr1;
+   }
 
 
 	generateSeeds(title, wallet) {
@@ -29,7 +39,8 @@ export default class DownloadCampaign extends React.Component {
 		var masterKey = [];
 
 		for (var i = 0; i < qtdWallet; i++) {
-			masterKey[i] = "" + text + title + i;
+			let textss = "" + text + title + i;
+			masterKey[i] = textss;
 		 }
 
 		 return masterKey;
@@ -38,22 +49,48 @@ export default class DownloadCampaign extends React.Component {
 	generateSHA256(seed) {
 
 		var bitcoin = require("bitcoinjs-lib");
-		var bigi = require('bigi');
 		var hash = bitcoin.crypto.sha256(seed);
-    	var d = bigi.fromBuffer(hash);
 
-    	var keyPair = new bitcoin.ECPair(d);
-    	var address = keyPair.getAddress();
+    	// var keyPair = new bitcoin.ECPair(hash);
+    	// var address = keyPair.getAddress();
 
-    	return address;
+    	return hash;
 	}
 
 	base58Encode(textualSeed) {
-		const bs58 = require('bs58')
+		const bs58 = require('bs58');
 
-		var bytes = Buffer.from(textualSeed);
-		var address = bs58.encode(bytes);
+		//var bytes = Buffer.from(textualSeed);
+		var address = bs58.encode(textualSeed);
 		return address;
+	}
+
+	base58Decode(textualSeed) {
+		var bs58check = require('bs58check');
+		var bitcoin = require("bitcoinjs-lib")
+
+		var decoded = bs58check.decode(textualSeed);
+
+		var d = bigi.fromBuffer(decoded);
+
+    	var keyPair = new bitcoin.ECPair(d);
+
+    	console.log(keyPair);
+    	var address = keyPair.getAddress();
+
+		return address;
+	}
+
+	generatePublicKey(text) {
+		var bitcoin = require("bitcoinjs-lib");
+
+    	var keyPair = bitcoin.ECPair.fromWIF(text);
+    	//var keyPair = new bitcoin.address.fromBase58Check(hash);
+    	var address = keyPair.getAddress();
+
+
+		return address;
+
 	}
 
 	generateAddressBitcoin(seed) {
@@ -70,13 +107,13 @@ export default class DownloadCampaign extends React.Component {
 	}
 
 	generateWIFform(privateKey) {
-		var bitcoin = require("bitcoinjs-lib");
-		var bigi = require('bigi');
-		var d = bigi.fromBuffer(privateKey);
-		var keyPair = new bitcoin.ECPair(d);
-		var address = keyPair.toWIF();
+		var wif = require('wif');
 
-		return address;
+		var privateKey = new Buffer(privateKey);
+
+		var key = wif.encode(128, privateKey, false);
+
+		return key;
 	}
 
 	generateFileCoinWise(text, fileName) {
@@ -95,6 +132,7 @@ export default class DownloadCampaign extends React.Component {
 		var finalSeed = [];
 		var privateKey = [];
 		var WIFform = [];
+		var publicKey = [];
 		var url = [];
 
 		for(var j = 0; j < _masterKey.length; j++){
@@ -107,8 +145,13 @@ export default class DownloadCampaign extends React.Component {
 			finalSeed[t] = intermediarySeed[t].substring(0,20);
 			privateKey[t] = this.generateSHA256(finalSeed[t]);
 			WIFform[t] = this.generateWIFform(privateKey[t]);
-			url[t] = this.generateAddressBitcoin(finalSeed[t]);
+			publicKey[t] = this.generatePublicKey(WIFform[t]);
+		    url[t] = this.generateAddressBitcoin(finalSeed[t]);
 		}
+
+		console.log(WIFform);
+		console.log(publicKey);
+		console.log(url);
 
 		var output = [];
 		var textCoinWISE = ""; //texto para download
@@ -119,7 +162,7 @@ export default class DownloadCampaign extends React.Component {
 		for(var i = 0; i < WIFform.length; i++) {
 			output[i] = {
 				WIF: WIFform[i],
-				key: privateKey[i],
+				key: publicKey[i],
 				seed: url[i]
 			}
 			textCoinWISE += output[i].WIF + " " + output[i].key + " " + output[i].seed + "\n"; 
@@ -139,6 +182,7 @@ export default class DownloadCampaign extends React.Component {
 		
 		return(
 			<div>
+				<h2>{this.state.title}</h2>
 				<div className="height20"></div>
 				<div className="table-responsive">
   					<table className="table table-hover">

@@ -1,7 +1,7 @@
 body {
   margin-top: 0;
-  margin-left: 2px;
-  margin-right: 2px;
+  margin-left: 3px;
+  margin-right: 3px;
   padding: 0;
   font-family: 'Ubuntu', sans-serif;
   background-color: indianred;
@@ -57,6 +57,13 @@ body {
 h2, h3, h4, h5, h6, a {
   margin:0; padding:0;
 }
+
+.table-responsive {
+  margin-left: 4px;
+  margin-right: 4px;
+  border:2px solid #fff;
+  border-radius: 3px;
+}
 .formadd {
   margin:0 auto;
   max-width:500px;
@@ -87,7 +94,8 @@ h2, h3, h4, h5, h6, a {
   text-align:center;
 }
 .formadd input[type="text"],
-.formadd input[type="number"] {
+.formadd input[type="number"],
+.formadd input[type="date"] {
   max-width:400px;
 	width: 80%;
   line-height:3em;

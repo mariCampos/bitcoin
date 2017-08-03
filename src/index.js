@@ -8,7 +8,8 @@ module.exports = {
   bitcoin: require('bitcoinjs-lib'),
   BigInteger: require('bigi'),
   Buffer: require('buffer'),
-  bigi: require('bigi')
+  bigi: require('bigi'),
+  wif: require('wif')
 }
 
 ReactDOM.render(
